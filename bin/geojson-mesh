@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const topojson = require('topojson');
+const topojsonClient = require('topojson-client');
+
+// read GeoJSON from stdin
+var input_string = fs.readFileSync('/dev/stdin');
+
+// parse as JSON
+var input_json = JSON.parse(input_string);
+
+// create TopoJSON topology
+var topology = topojson.topology({layer: geojson});
+
+// create the mesh returns GeoJSON
+// https://github.com/topojson/topojson-client#mesh
+var output_json = topojsonClient.mesh(topology);
+
+// stringify
+var output_string = JSON.stringify(output_json);
+
+// write GeoJSON MulitLineString to stdout
+process.stdout.write(out);

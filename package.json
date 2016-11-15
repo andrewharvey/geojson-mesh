@@ -1,0 +1,23 @@
+{
+  "name": "geojson-mesh",
+  "version": "1.0.0",
+  "description": "Command line tool to extract shared borders of Polygons in a GeoJSON",
+  "bin": "bin/geojson-mesh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewharvey/geojson-mesh.git"
+  },
+  "keywords": [
+    "geojson"
+  ],
+  "author": "Andrew Harvey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewharvey/geojson-mesh/issues"
+  },
+  "homepage": "https://github.com/andrewharvey/geojson-mesh#readme",
+  "dependencies": {
+    "topojson": "^2.0.0",
+    "topojson-client": "^2.1.0"
+  }
+}
