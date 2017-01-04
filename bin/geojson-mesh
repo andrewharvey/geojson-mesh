@@ -8,7 +8,7 @@ const topojsonClient = require('topojson-client');
 var input_string = fs.readFileSync('/dev/stdin');
 
 // parse as JSON
-var input_json = JSON.parse(input_string);
+var geojson = JSON.parse(input_string);
 
 // create TopoJSON topology
 var topology = topojson.topology({layer: geojson});
@@ -18,7 +18,7 @@ var topology = topojson.topology({layer: geojson});
 var output_json = topojsonClient.mesh(topology);
 
 // stringify
-var output_string = JSON.stringify(output_json);
+var out = JSON.stringify(output_json);
 
 // write GeoJSON MulitLineString to stdout
 process.stdout.write(out);
