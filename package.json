@@ -1,6 +1,6 @@
 {
   "name": "geojson-mesh",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line tool to extract shared borders of Polygons in a GeoJSON",
   "bin": "bin/geojson-mesh",
   "repository": {
