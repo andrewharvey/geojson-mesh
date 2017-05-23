@@ -1,6 +1,6 @@
 {
   "name": "geojson-mesh",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Command line tool to extract shared borders of Polygons in a GeoJSON",
   "bin": "bin/geojson-mesh",
   "repository": {
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/andrewharvey/geojson-mesh#readme",
   "dependencies": {
+    "minimist": "^1.2.0",
+    "multigeojson": "0.0.1",
     "topojson": "^2.0.0",
     "topojson-client": "^2.1.0"
   }

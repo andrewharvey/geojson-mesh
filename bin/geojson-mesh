@@ -3,22 +3,48 @@
 const fs = require('fs');
 const topojson = require('topojson');
 const topojsonClient = require('topojson-client');
+const multigeojson = require('multigeojson');
+const argv = require('minimist')(process.argv.slice(2));
+
+if (argv.h || argv.help) {
+    console.log('Usage: geojson-mesh [--explode] < polygons.geojson > mesh.geojson');
+    console.log('   --explode: If provided multiple LineString features are returned,');
+    console.log('              otherwise a single MultiLineString feature is returned.');
+    process.exit();
+}
 
 // read GeoJSON from stdin
-var input_string = fs.readFileSync('/dev/stdin');
-
-// parse as JSON
-var geojson = JSON.parse(input_string);
+var source_geojson = JSON.parse(fs.readFileSync('/dev/stdin'));
 
 // create TopoJSON topology
-var topology = topojson.topology({layer: geojson});
+var topology = topojson.topology({layer: source_geojson});
 
-// create the mesh returns GeoJSON
+// create the mesh returns GeoJSON MultiLineString Geometry object
 // https://github.com/topojson/topojson-client#mesh
-var output_json = topojsonClient.mesh(topology);
+var multiLineStringGeom = topojsonClient.mesh(topology);
 
-// stringify
-var out = JSON.stringify(output_json);
+var dest_geojson;
 
-// write GeoJSON MulitLineString to stdout
-process.stdout.write(out);
+if (argv.explode) {
+    var lineStringGeoms = multigeojson.explode(multiLineStringGeom);
+    var lineStringFeatures = lineStringGeoms.map((geom) => {
+        return {
+            type: "Feature",
+            properties: {},
+            geometry: geom
+        };
+    });
+    dest_geojson = {
+        type: "FeatureCollection",
+        features: lineStringFeatures
+    };
+} else {
+    dest_geojson = {
+        type: "Feature",
+        properties: {},
+        geometry: multiLineStringGeom
+    };
+}
+
+// write GeoJSON to stdout
+process.stdout.write(JSON.stringify(dest_geojson));
