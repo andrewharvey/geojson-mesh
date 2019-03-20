@@ -1,6 +1,6 @@
 # geojson-mesh
 
-Command line tool to extract shared borders of Polygons in a GeoJSON. See https://github.com/topojson/topojson-client#mesh
+Command line tool to extract borders of GeoJSON Polygons into a non-overlapping set of LineString's. See https://github.com/topojson/topojson-client#mesh
 
 ## Build
 
